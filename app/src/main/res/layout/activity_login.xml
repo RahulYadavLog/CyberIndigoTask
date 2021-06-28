@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="20dp"
+    tools:context=".LoginActivity">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_text_input"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_margin="5dp"
+            android:transitionName="email"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:hint="@string/prompt_email"
+                android:inputType="textEmailAddress"
+                android:selectAllOnFocus="true" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_text"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_margin="5dp"
+            android:transitionName="password"
+            app:endIconMode="password_toggle"
+            android:layout_height="wrap_content"
+            >
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_password"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:selectAllOnFocus="true" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="10dp"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:transitionName="login"
+                android:textColor="@color/white"
+                android:background="@color/colorPrimary"
+                android:layout_marginBottom="64dp"
+                android:text="@string/action_sign_in" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/sign_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:padding="10dp"
+                android:transitionName="signup"
+                android:layout_margin="5dp"
+                android:textColor="@color/white"
+                android:background="@color/colorPrimary"
+                android:text="@string/action_register" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/forget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:transitionName="forget"
+            android:textColor="@color/colorPrimary"
+            android:layout_margin="10dp"
+            android:textSize="18dp"
+            android:text="Forget Password"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

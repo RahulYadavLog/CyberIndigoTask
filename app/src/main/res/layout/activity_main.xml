@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/mainLayout"
+    tools:context=".MainActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card1"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:padding="20dp"
+        android:background="@drawable/card_background"
+        android:layout_height="40dp"
+        android:elevation="3dp">
+        <EditText
+            android:id="@+id/editSearch"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:textColor="@color/colorWhite"
+            android:padding="10dp"
+            android:maxLength="20"
+            android:textColorHint="@color/colorWhite"
+            android:background="@drawable/card_background"
+            app:backgroundTint="@color/colorPrimary"
+            android:hint="Enter User Name"/>
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/card1"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="logOut"
+            android:layout_margin="10dp"
+            android:text="Logout"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="CurrentLocation"
+            android:layout_margin="10dp"
+            android:text="Current Location"/>
+    </LinearLayout>
+</RelativeLayout>
