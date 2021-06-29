@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -177,6 +178,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void logOut(View view) {
+        try {
+            SharedPreferences sp=getSharedPreferences("Login", MODE_PRIVATE);
+            SharedPreferences.Editor Ed=sp.edit();
+            Ed.putString("Unm","");
+            Ed.putString("Psw","");
+            Ed.commit();
+            finish();
+            Toast.makeText(this, "Logout Success", Toast.LENGTH_SHORT).show();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
     }
 
     public void CurrentLocation(View view) {

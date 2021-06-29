@@ -3,6 +3,7 @@ package com.example.cyberindigotask;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -36,6 +37,22 @@ public class LoginActivity extends AppCompatActivity {
         password=findViewById(R.id.password);
         loginBtn=findViewById(R.id.login);
         signUpBtn=findViewById(R.id.sign_up);
+        try {
+
+
+        SharedPreferences sp1=this.getSharedPreferences("Login", MODE_PRIVATE);
+
+        String unm=sp1.getString("Unm", null);
+        String pass = sp1.getString("Psw", null);
+
+        if (!unm.isEmpty())
+        {
+            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+            startActivity(intent);
+        }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,6 +77,11 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(JSONObject response) {
 
+                    SharedPreferences sp=getSharedPreferences("Login", MODE_PRIVATE);
+                    SharedPreferences.Editor Ed=sp.edit();
+                    Ed.putString("Unm",username.getText().toString() );
+                    Ed.putString("Psw",password.getText().toString());
+                    Ed.commit();
                     Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
 
                     Intent intent=new Intent(LoginActivity.this,MainActivity.class);
