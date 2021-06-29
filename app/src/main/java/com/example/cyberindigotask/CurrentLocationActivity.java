@@ -62,7 +62,6 @@ public class CurrentLocationActivity extends AppCompatActivity
         public void onPause() {
             super.onPause();
 
-            //stop location updates when Activity is no longer active
             if (mFusedLocationClient != null) {
                 mFusedLocationClient.removeLocationUpdates(mLocationCallback);
             }
@@ -74,7 +73,7 @@ public class CurrentLocationActivity extends AppCompatActivity
             mGoogleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
             mLocationRequest = new LocationRequest();
-            mLocationRequest.setInterval(120000); // two minute interval
+            mLocationRequest.setInterval(120000);
             mLocationRequest.setFastestInterval(120000);
             mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 
@@ -82,11 +81,9 @@ public class CurrentLocationActivity extends AppCompatActivity
                 if (ContextCompat.checkSelfPermission(this,
                         Manifest.permission.ACCESS_FINE_LOCATION)
                         == PackageManager.PERMISSION_GRANTED) {
-                    //Location Permission already granted
                     mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
                     mGoogleMap.setMyLocationEnabled(true);
                 } else {
-                    //Request Location Permission
                     checkLocationPermission();
                 }
             }
@@ -101,7 +98,6 @@ public class CurrentLocationActivity extends AppCompatActivity
             public void onLocationResult(LocationResult locationResult) {
                 List<Location> locationList = locationResult.getLocations();
                 if (locationList.size() > 0) {
-                    //The last location in the list is the newest
                     Location location = locationList.get(locationList.size() - 1);
                     Log.i("MapsActivity", "Location: " + location.getLatitude() + " " + location.getLongitude());
                     mLastLocation = location;
@@ -109,15 +105,12 @@ public class CurrentLocationActivity extends AppCompatActivity
                         mCurrLocationMarker.remove();
                     }
 
-                    //Place current location marker
                     LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
                     MarkerOptions markerOptions = new MarkerOptions();
                     markerOptions.position(latLng);
                     markerOptions.title("Current Position");
                     markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
                     mCurrLocationMarker = mGoogleMap.addMarker(markerOptions);
-
-                    //move map camera
                     mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 11));
                 }
             }
@@ -128,20 +121,14 @@ public class CurrentLocationActivity extends AppCompatActivity
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED) {
 
-                // Should we show an explanation?
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                         Manifest.permission.ACCESS_FINE_LOCATION)) {
-
-                    // Show an explanation to the user *asynchronously* -- don't block
-                    // this thread waiting for the user's response! After the user
-                    // sees the explanation, try again to request the permission.
                     new AlertDialog.Builder(this)
                             .setTitle("Location Permission Needed")
                             .setMessage("This app needs the Location permission, please accept to use location functionality")
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    //Prompt the user once explanation has been shown
                                     ActivityCompat.requestPermissions(CurrentLocationActivity.this,
                                             new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                                             MY_PERMISSIONS_REQUEST_LOCATION );
@@ -152,7 +139,6 @@ public class CurrentLocationActivity extends AppCompatActivity
 
 
                 } else {
-                    // No explanation needed, we can request the permission.
                     ActivityCompat.requestPermissions(this,
                             new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                             MY_PERMISSIONS_REQUEST_LOCATION );
@@ -166,12 +152,8 @@ public class CurrentLocationActivity extends AppCompatActivity
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
             switch (requestCode) {
                 case MY_PERMISSIONS_REQUEST_LOCATION: {
-                    // If request is cancelled, the result arrays are empty.
                     if (grantResults.length > 0
                             && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                        // permission was granted, yay! Do the
-                        // location-related task you need to do.
                         if (ContextCompat.checkSelfPermission(this,
                                 Manifest.permission.ACCESS_FINE_LOCATION)
                                 == PackageManager.PERMISSION_GRANTED) {
@@ -182,15 +164,10 @@ public class CurrentLocationActivity extends AppCompatActivity
 
                     } else {
 
-                        // permission denied, boo! Disable the
-                        // functionality that depends on this permission.
                         Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
                     }
                     return;
                 }
-
-                // other 'case' lines to check for other
-                // permissions this app might request
             }
         }
     }

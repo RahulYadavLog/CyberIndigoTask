@@ -13,7 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CyberIndigoTask">
         <activity android:name=".CurrentLocationActivity"></activity>
-        <activity android:name=".SignUpActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
